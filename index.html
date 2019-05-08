@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>BIKE RENTING</title>
+		<meta name="description" content="Location de vélo.">
+		<link rel="icon" type="image/png" href="images/favIcon/logo_bike.png">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+    	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    	<link rel="stylesheet" href="css/style.css">
+	</head>
+	
+	<body>
+		<header>
+			<h1>BIKE RENTIN</h1>
+			<img src="images/favIcon/logo_ultime.png" alt="logo_bike_renting">
+		</header>
+
+		<!-- Slider -->
+		<section class="contents">
+			<h2 class="title">Réservez votre vélo maintenant !</h2>
+
+			<div class="slider">
+				<input type="button" name="left_button" class="input_slider" id="left_button" value= "<">
+
+				<div class="container" id="container_main" tabindex="0">
+					<figure id="slider_container">
+						<img src="images/slide/slide1.png" alt="map">
+						<img src="images/slide/slide2.png" alt="formulaire" class="slide2">
+						<img src="images/slide/slide3.png" alt="Vélo" class="slide3">
+					</figure>
+
+					<figure class="container_button" id="container_button">
+						<img src="images/icone/pause_button.png" alt="pause" id="pause_button">
+						<img src="images/icone/play_button.png" alt="play" id="play_button">
+					</figure>
+				</div>
+				<input type="button" name="right_button" class="input_slider" id="right_button" value= ">">
+			</div>
+		</section>
+
+		<!-- Booking -->
+		<section class="contents">
+			<h2 class="title">Carte de réservation de vélo </h2>
+
+			<!-- Input zoom -->
+			<span class="zoom_container">
+				<input type="button" name="zoom" id="input_zoom" value="Activer / Désactiver le zoom">
+			</span>
+
+			<!-- Map -->
+			<div id="map">
+			</div>
+
+			<form id="form_">
+				<!-- Information use for Javascript -->
+				<section id="information">
+					<h3 class="title">Station:</h3>
+					<p id="text_info">Cliquez sur une station de vélo pour afficher le formulaire</p>
+					<div id="address_st"></div>
+					<div id="status"></div>
+					<div id="status_bike"></div>
+				</section>
+
+				<!-- Input -->
+				<div id="input_field">
+					<input type="text" name="name" id="name" placeholder="Nom" required>
+					<input type="text" name="firstName" id="firstName" placeholder="Prénom" required>
+					<input type="submit" name="reserve" class="reserve_button" value="Reserver">
+				</div>
+			</form>
+		</section>
+
+		<div id="canvas_container">
+			<canvas></canvas>
+			<div>
+				<input type="button" value="Annuler" class="input_cancel" id="input_cancel">
+				<input type="button" value="Effacer" class="input_erase" id="input_erase">
+				<input type="button" value="Valider" class="input_validate" id="input_validate">
+				<p id="error_message"></p>
+			</div>
+		</div>
+		
+		<section class="booked_section" id="booked_anchor">
+			<h3>Détail de la Réservation: </h3>
+			<p id="booked">Pas de réservation</p>
+
+			<div id="timer_section">
+				<span id="timer"></span> <!-- For js -->
+				<span id="min"></span> <!-- For js -->
+				<span id="sec"></span> <!-- For js -->
+			</div>
+			
+			<input type="button" name="delete" id="input_deleteId" class="input_delete" value="Supprimer la réservation">
+		</section>
+
+		<!-- JS -->
+		<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+   		<script src="js/function/ajax.js"></script>
+   		<script src="js/class/Book.js"></script>
+   		<script src="js/class/Map.js"></script>
+		<script src="js/class/Data.js"></script>
+		<script src="js/class/Canvas.js"></script>
+		<script src="js/class/Slider.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
