@@ -1,0 +1,569 @@
+
+/* Desktop */
+/* ....... */
+/* ....... */
+
+
+/* Base */
+/* .... */
+/* .... */
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	/*line-height: 0;*/
+}
+
+body {
+	font-family: Tahoma;
+	font-size: 62.5%; /* Base 10px */
+}
+
+h1 {
+	display: inline;
+	font-size: 4em;
+	color: #3e3e3e;
+}
+
+img {
+	width: 100%;
+}
+
+h2 {
+	font-size: 2.5em;
+	color: #3e3e3e;
+}
+
+h3 {
+	font-size: 2em;
+	color: #3e3e3e;
+}
+
+p {
+	color: #3e3e3e;
+}
+
+
+/* Layout */
+/* ...... */
+/* ...... */
+
+/* Header */
+
+header {
+	padding-top: 25px;
+	padding-bottom: 25px;
+	text-align: center;
+	box-shadow: 0px 4px 5px #d4d4d4;
+}
+
+header img {
+	width: 100px;	
+}
+
+
+/* Slider */
+
+.contents {
+	overflow: hidden;
+	text-align: center;
+
+}
+
+.title {
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
+
+.slider {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	background-color: #f3f3f3;
+}
+
+.input_slider {
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	padding-left: 25px;
+	padding-right: 25px;
+	font-size: 3em;
+	font-weight: bold;
+	color: white;
+	background-color: #3e3e3e;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.container {
+	overflow: hidden;
+	outline: none;
+}
+
+.slider #slider_container {
+	-webkit-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	left: 0;
+	position: relative;
+}
+
+.container_button {
+	display: none;
+	position: absolute;
+	top: 46.5%;
+	left: 48.3%;
+	width: 4%;
+	cursor: pointer;
+	border-radius: 100%;
+}
+
+#play_button {
+	display: none;
+}
+
+.slide2 {
+	position: absolute;
+	top: 0;
+	left: 100%;
+}
+
+.slide3 {
+	position: absolute;
+	top: 0;
+	left: 200%;
+}
+
+
+/* Map */
+
+#map {
+	z-index: 1;
+	float: left;
+	width: 75%;
+	height: 700px;
+}
+
+.zoom_container {
+	z-index: 2;
+	position: absolute;
+	left: 15%;
+}
+
+.zoom_container input {
+	padding: 7px;
+	font-size: 1.5em;
+	background-color: #3e3e3e;
+	color: white;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+	outline: none;
+}
+
+
+/* Form */
+
+form {
+	float: left;
+	width: 25%;
+	height: 700px;
+	background-color: #f3f3f3;
+}
+
+#information {
+	font-size: 1.5em;
+}
+
+#information h3 {
+	margin-bottom: 50px;
+	border-top: 5px solid #3e3e3e;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	background-color: #3e3e3e;
+	color:#e0e0e0;
+}
+
+#information p {
+	font-size: 1.5em;
+}
+
+#information div {
+	margin: auto;
+	width: 80%;
+	padding-bottom: 15px;
+	text-align: left;
+	font-size: 1.5em;
+	color: #3e3e3e;
+}
+
+#input_field {
+	display: none;
+}
+
+form input {
+	margin-top: 20px;
+	padding: 10px;
+	width: 80%;
+    font-size: 1.4em;
+    border: none;
+	border-radius: 3px;
+	border: 1px solid #cccccc;
+	box-shadow: 0px 4px 5px #d4d4d4;
+}
+
+.reserve_button{
+	cursor: pointer;
+	outline: none;
+}
+
+/* Canvas */
+
+#canvas_container {
+	z-index: 5;
+	display: none;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	text-align: center;
+}
+
+canvas {
+	background-color: #e0e0e0;
+}
+
+.input_cancel {
+	margin-right: 20px;
+	padding: 10px;
+	border: none;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background-color: #a10000;
+	color: white;
+	outline: none;
+	font-size: 2.5em;
+	cursor: pointer;
+	box-shadow: 0px 4px 5px #a10000;
+}
+
+.input_erase {
+	padding: 10px;
+	border: none;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background-color: #cb7300;
+	color: white;
+	font-size: 2.5em;
+	outline: none;
+	cursor: pointer;
+	box-shadow: 0px 4px 5px #cb7300;
+}
+
+.input_validate {
+	margin-left: 20px;
+	padding: 10px;
+	border: none;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background-color: #078701;
+	color: white;
+	font-size: 2.5em;
+	outline: none;
+	cursor: pointer;
+	box-shadow: 0px 4px 5px #078701;
+}
+
+#error_message {
+	margin-top: 20px;
+	color: red;
+	font-size: 2.5em;
+}
+
+
+/* Booked */
+
+.booked_section {
+	padding-top: 25px;
+	padding-bottom: 25px;
+	text-align: center;
+	font-size: 2.5em;
+	background-color: #e0e0e0; /* f3f3f3*/
+	border-top: 10px solid #3e3e3e;
+}
+
+.booked_section h3 {
+	font-size: 1.5em;
+}
+
+.booked_section p {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#timer_section{
+	display: none;
+	color: #3e3e3e;
+	font-weight: bold;
+}
+
+.input_delete {
+	display: none;
+	padding: 10px;
+	border: none;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	background-color: #cb0000;
+	color: white;
+	outline: none;
+	cursor: pointer;
+	box-shadow: 0px 4px 5px #cb0000;
+}
+
+/* Module (small content) */
+/* ...................... */
+/* ...................... */
+
+
+/* State (state elements) */
+/* ...................... */
+/* ...................... */
+
+
+/* Map */
+
+.zoom_container input:hover {
+	background-color: white;
+	color: #3e3e3e;
+}
+
+
+/* Slider */
+
+.slider input:hover {
+	color: black;
+	background-color: white;
+}
+
+
+/* Contact */
+
+.reserve_button:hover {
+	background-color: #e8e8e8;
+}
+
+
+/* Canvas */
+
+.input_cancel:hover {
+	background-color: #a13b3b;
+	box-shadow: 0px 4px 5px #a13b3b;
+}
+
+.input_erase:hover {
+	background-color: #ca8d3e;
+	box-shadow: 0px 4px 5px #ca8d3e;
+}
+
+.input_validate:hover {
+	background-color: #578155;
+	box-shadow: 0px 4px 5px #578155;
+}
+
+/* Booked */
+
+.input_button:hover {
+	background-color: #a13b3b;
+	box-shadow: 0px 4px 5px #a13b3b;
+}
+
+.input_delete:hover {
+	background-color: #a10000;
+	box-shadow: 0px 4px 5px #a10000;
+}	
+
+/* Factored */
+/* .................... */
+/* .................... */
+
+
+
+/* Tablet */
+/* ...... */
+/* ...... */
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+
+	/* Base */
+	/* .... */
+	/* .... */
+
+
+	/* Layout */
+	/* ...... */
+	/* ...... */
+
+
+	/* slider */
+
+	#container_button {
+		top: 45%;
+		left: 47%;
+		width: 6%;
+	}
+
+	#left_button {
+		z-index: 3;
+		position: absolute;
+		bottom: 37%;
+		left: 0;
+		padding-top: 35px;
+		padding-bottom: 35px;
+		padding-left: 12px;
+		width: 55px;
+		border-top-right-radius: 100px;
+		border-bottom-right-radius: 100px;
+		opacity: 0.8;
+	}
+
+	#right_button {
+		z-index: 4;
+		position: absolute;
+		bottom: 37%;
+		right: 0;
+		padding-top: 35px;
+		padding-bottom: 35px;
+		padding-left: 18px;
+		width: 55px;
+		border-top-left-radius: 100px;
+		border-bottom-left-radius: 100px;
+		opacity: 0.8;
+	}
+
+
+	/* Map */
+
+	#map {
+		float: none;
+		width: 100%;
+	}
+
+
+	/* Form */
+
+	form {
+		float: none;
+		width: 100%;
+		height: 500px;
+	}
+
+	#information div {
+		max-width: 490px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	#input_field {
+		max-width: 600px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+}
+
+
+/* Mobile */
+/* ....... */
+/* ....... */
+
+@media screen and (max-width: 768px) {
+
+	/* Base */
+	/* .... */
+	/* .... */
+
+	h1 {
+		font-size: 3em;
+	}
+
+
+	/* Layout */
+	/* ...... */
+	/* ...... */
+
+
+	/* Slider */
+
+	.title {
+		font-size: 1.9em;
+	}
+
+	#container_button {
+		top: 38%;
+		left: 43%;
+		width: 14%;
+	}
+	
+	#left_button {
+		z-index: 3;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 25%;
+		margin-left: 25%;
+		border-top-left-radius: 100px;
+		border-bottom-left-radius: 100px;
+		opacity: 0.8;
+	}
+
+	#right_button {
+		z-index: 4;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 25%;
+		margin-right: 25%;
+		border-top-right-radius: 100px;
+		border-bottom-right-radius: 100px;
+		opacity: 0.8;
+	}
+
+
+	/* Map */
+
+	#map {
+		float: none;
+		width: 100%;
+	}
+
+	#map h3 { /* popup */
+		font-size: 1em;
+	}
+
+	.zoom_container {
+		display: none;
+	}
+
+	/* Canvas */
+
+	#canvas_container input {
+		font-size: 2.1em;
+	}
+
+
+	/* Form */
+
+	form {
+		float: none;
+		width: 100%;
+		height: 500px;
+	}
+
+}
