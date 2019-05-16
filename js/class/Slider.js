@@ -7,12 +7,16 @@
 
 class Slider {
 	constructor() {
-	}
 
-	// Default values
-	maxLeft = 0;
-	maxRight = -200;
-	slideSize = 100;
+		// Default values
+		var maxLeft = 0;
+		var maxRight = -200;
+		var slideSize = 100;
+
+		this.maxLeft = maxLeft;
+		this.maxRight = maxRight;
+		this.slideSize = slideSize;
+	}
 
 	// Method
 	running() {
@@ -68,11 +72,11 @@ class Slider {
 		//...
 		var pause = false;
 
-		containerMainElt.onmouseover = function(){
+		containerMainElt.onmouseover = function() {
 			containerButtonElt.style.display = "block";
 		}
 
-		containerMainElt.onmouseout = function(){
+		containerMainElt.onmouseout = function() {
 			containerButtonElt.style.display = "none";
 		}
 
@@ -102,7 +106,7 @@ class Slider {
 				var leftSlider = getComputedStyle(sliderContainerElt).left;
 			}
 
-			var leftSliderInt = parseInt(leftSlider); //convert the input strings into int
+			var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
 
 			if(leftSliderInt > maxRight) {
 				leftSliderInt = leftSliderInt-slideSize;
@@ -132,7 +136,7 @@ class Slider {
 				var leftSlider = getComputedStyle(sliderContainerElt).left;
 			}
 
-			var leftSliderInt = parseInt(leftSlider); //convert the input strings into int
+			var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
 
 			if(leftSliderInt < maxLeft) {
 				leftSliderInt = leftSliderInt+slideSize;
@@ -166,7 +170,7 @@ class Slider {
 					var leftSlider = getComputedStyle(sliderContainerElt).left;
 				}
 
-				var leftSliderInt = parseInt(leftSlider); //convert the input strings into int
+				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
 
 				if(leftSliderInt > maxRight) {
 					leftSliderInt = leftSliderInt-slideSize;
@@ -194,7 +198,7 @@ class Slider {
 					var leftSlider = getComputedStyle(sliderContainerElt).left;
 				}
 
-				var leftSliderInt = parseInt(leftSlider); //convert the input strings into int
+				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
 
 				if(leftSliderInt < maxLeft) {
 					leftSliderInt = leftSliderInt+slideSize;

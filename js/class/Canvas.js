@@ -26,8 +26,6 @@ class Canvas {
 
 		canvas_container.style.display = "block";
 		canvas.width = window.innerWidth;
-		//canvas.height = window.innerHeight;
-		//canvas.width = "1200";
 		canvas.height = "500";
 		context.lineWidth = radius*2;
 
