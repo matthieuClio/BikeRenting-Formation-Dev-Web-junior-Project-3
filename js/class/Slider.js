@@ -158,10 +158,8 @@ class Slider {
 		// Keyboard
 		//...
 		containerMainElt.onkeydown = function() {
-			console.log('39');
+
 			if(event.keyCode == 39) { // KeyCode: right spire
-				
-				console.log('39');
 
 				if(sliderContainerElt.style.left) {
 					var leftSlider = sliderContainerElt.style.left;
@@ -188,8 +186,6 @@ class Slider {
 			}
 
 			else if(event.keyCode == 37) { // KeyCode: left spire
-				
-				console.log('37');
 				
 				if(sliderContainerElt.style.left) {
 					var leftSlider = sliderContainerElt.style.left;

@@ -56,6 +56,7 @@ class Data {
         });
     } // End add_marker
 
+
     marker_data() {
         
         // Key API
@@ -83,7 +84,7 @@ class Data {
 
             } // End function Ajax
         );
-
+        
     }// End marker_data
 
 
