@@ -6,28 +6,39 @@
 //...
 
 class Canvas {
+
+	canvas = document.querySelector("canvas");
+	canvas_container = document.getElementById("canvas_container");
+	error_message = document.getElementById("error_message");
+	booked = false;
+	context = this.canvas.getContext('2d');
+	radius = 5;
+	dragging = false;
+
+
 	constructor() {
+
+		let canvas = this.canvas;
+		let canvas_container = this.canvas_container;
+		let error_message = this.error_message;
+		let context = this.context;
+		let radius = this.radius;
+		let dragging = this.dragging;
     }
 
+    // Method running
     running() {
-    	var canvas_container = document.getElementById("canvas_container");
-		var canvas = document.querySelector("canvas");
-		var error_message = document.getElementById("error_message");
-		var inputCancel = document.getElementById("input_cancel");
-		var inputErase = document.getElementById("input_erase");
-		var inputValidate = document.getElementById("input_validate");
 
+		this.canvas_container.style.display = "block";
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = "500";
+		this.context.lineWidth = this.radius*2;
 
-		var context = canvas.getContext('2d');
-		var radius = 5; 
-		var dragging = false;
-		var booked = false;
-		var bookObject = new Book();
+		// Define some variables for be used in functions !
+		let dragging = this.dragging;
+		let context = this.context;
+		let radius = this.radius;
 
-		canvas_container.style.display = "block";
-		canvas.width = window.innerWidth;
-		canvas.height = "500";
-		context.lineWidth = radius*2;
 
 		function putPoint(e) {
 			if(dragging) {
@@ -52,12 +63,10 @@ class Canvas {
 					context.moveTo(e.touches[0].clientX, e.touches[0].clientY);
 				}
 			}	// End dragging
-			
+
 		}	// End function putPoint
-
+	
 		function enalble(e) {
-			booked = true;
-
 			dragging = true;
 			putPoint(e);
 		}
@@ -67,65 +76,54 @@ class Canvas {
 			context.beginPath();
 		}
 
-		function resize() {
-			booked = false;
-
-			canvas.width = window.innerWidth;
-			canvas.height = "500";
-			context.lineWidth = radius*2;
-		}
-
-		function cancelCanvas() {
-			canvas_container.style.display = "none";
-		}
-
-		function resetText() {
-			error_message.textContent = "";
-		}
-
 		if (screen.width > 1279) {
 			// Event mouse on canvas
-			canvas.addEventListener('mousedown', enalble);
-			canvas.addEventListener('mousemove', putPoint);
-			canvas.addEventListener('mouseup', disable);
-			canvas.addEventListener("mouseout", disable);
+
+			putPoint();
+
+			this.canvas.addEventListener('mousedown', enalble);
+			this.canvas.addEventListener('mousedown', putPoint);
+			this.canvas.addEventListener('mousemove', putPoint);
+			this.canvas.addEventListener('mouseup', disable);
+			this.canvas.addEventListener("mouseout", disable);
 		}
 
 		// Dragging for tablet - Mobile
 		else if (screen.width <= 1279) {
 
 			// Event tactile on canvas
-			canvas.addEventListener('touchstart', enalble);
-			canvas.addEventListener('touchmove', putPoint);
-			canvas.addEventListener('touchend', disable);
-		}
-
-		// Browser resizing
-		window.onresize = resize;
-
-		// Buttton Event
-		inputCancel.onclick = function() {
-			resetText(); // Delete error message
-			cancelCanvas();
-		}
-
-		inputErase.onclick = function() {
-			resetText(); // Delete error message
-			resize();
-		}
-
-		inputValidate.onclick = function() {
-			if(booked) {
-
-				bookObject.deleteBooking(); // Delete a previous booking
-				cancelCanvas();
-				setTimeout(bookObject.addBooking, 1500); // Have time to delete a booking before adding
-			}
-			else {
-				error_message.textContent = "Vous devez signer pour valider";
-			}
+			this.canvas.addEventListener('touchstart', enalble);
+			this.canvas.addEventListener('touchmove', putPoint);
+			this.canvas.addEventListener('touchend', disable);
 		}
 
     } // End running()
+
+    // Method cancelCanvas
+    cancelCanvas() {
+    	this.canvas_container.style.display = "none";
+    }
+
+    // Method resetText
+    resetText() {
+    	this.error_message.textContent = "";
+    }
+
+    // Method resize
+    resize() {
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = "500";
+		this.context.lineWidth = this.radius*2;
+    }
+
+    // Method validationCanvas
+    validationCanvas() {
+		this.canvas_container.style.display = "none";
+    }
+    
+    // Method errorCanvas
+    errorCanvas() {
+    	this.error_message.textContent = "Vous devez signer pour valider";
+    }
 
 } // End class Canvas

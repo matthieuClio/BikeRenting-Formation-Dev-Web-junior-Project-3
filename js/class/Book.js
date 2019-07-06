@@ -6,12 +6,35 @@
 //...
 
 class Book {
+
+		booking_dataElt = document.getElementById("address_st"); // Booking adress
+		booking_sectionElt = document.getElementById("booked"); // Booking location
+		input_nameElt = document.getElementById("name");
+		input_first_nameElt = document.getElementById("firstName");
+		inputDeleteElt = document.getElementById("input_deleteId");
+		timerSectionElt = document.getElementById("timer_section");
+		timerElt = document.getElementById("timer");
+		minElt = document.getElementById("min");
+		secElt = document.getElementById("sec");
+		timerMin = 20;
+		timerSec = '00';
+
 	constructor() {
+		var booking_dataElt = this.booking_dataElt;
+		var booking_sectionElt = this.booking_dataElt;
+		var input_nameElt = this.input_nameElt;
+		var input_first_nameElt = this.nput_first_nameElt;
+		var inputDeleteElt = this.inputDeleteElt;
+		var timerSectionElt = this.imerSectionElt;
+		var timerElt = this.timerElt;
+		var minElt = this.minElt;
+		var secElt = this.ecElt;
+		var timerMin = this.timerMin;
+		var timerSec = this.timerSec;
 	}
 
 	addBooking() {
-
-		var booking_dataElt = document.getElementById("address_st"); // Booking adress
+		/*var booking_dataElt = document.getElementById("address_st"); // Booking adress
 		var booking_sectionElt = document.getElementById("booked"); // Booking location
 		var input_nameElt = document.getElementById("name");
 		var input_first_nameElt = document.getElementById("firstName");
@@ -22,24 +45,25 @@ class Book {
 		var secElt = document.getElementById("sec");
 
 		var timerMin = 20;
-		var timerSec = '00';
+		var timerSec = '00'; */
 
-		localStorage.setItem("name", input_nameElt.value);
-		localStorage.setItem("first_name", input_first_nameElt.value);
-		sessionStorage.setItem("booking", booking_dataElt.textContent + ", Réservé par: " + input_nameElt.value + " " + input_first_nameElt.value);
-		sessionStorage.setItem("timerMin", timerMin);
-		sessionStorage.setItem("timerSec", timerSec);
+		//console.log(input_nameElt);
+		localStorage.setItem("name", this.input_nameElt.value);
+		localStorage.setItem("first_name", this.input_first_nameElt.value);
+		sessionStorage.setItem("booking", this.booking_dataElt.textContent + ", Réservé par: " + this.input_nameElt.value + " " + this.input_first_nameElt.value);
+		sessionStorage.setItem("timerMin", this.timerMin);
+		sessionStorage.setItem("timerSec", this.timerSec);
 
-		booking_sectionElt.textContent = sessionStorage.booking;
-		timerElt.textContent = "Temps restant: ";
-		minElt.textContent = sessionStorage.timerMin + " min ";
-		secElt.textContent = sessionStorage.timerSec + "s ";
+		this.booking_sectionElt.textContent = sessionStorage.booking;
+		this.timerElt.textContent = "Temps restant: ";
+		this.minElt.textContent = sessionStorage.timerMin + " min ";
+		this.secElt.textContent = sessionStorage.timerSec + "s ";
 
-		timerSectionElt.style.display = "block";
-		inputDeleteElt.style.display = "inline-block";
+		this.timerSectionElt.style.display = "block";
+		this.inputDeleteElt.style.display = "inline-block";
 
 		// Start the timer
-		bookObject.timer();
+		this.timer();
 	}
 
 	deleteBooking() {
@@ -57,7 +81,7 @@ class Book {
 		var input_delete = document.getElementById("input_deleteId");
 		
 		input_delete.onclick = function() {
-            bookObject.deleteBooking();
+            this.deleteBooking();
         }
 	}
 
@@ -87,7 +111,7 @@ class Book {
 				}
 				else {
 					clearInterval(timerBooked);
-					bookObject.deleteBooking();
+					this.deleteBooking();
 				}
 			}
 			else {
@@ -97,8 +121,13 @@ class Book {
 	} // End method timer
 
 	bookingButton() {
+		var canvas_containerElt = document.querySelector("canvas");
 		var formElt = document.getElementById("form_");
+		var inputCancel = document.getElementById("input_cancel");
+		var inputErase = document.getElementById("input_erase");
+		var inputValidate = document.getElementById("input_validate");
         var canvas = new Canvas(); // js/class/Canvas.js
+        var booked = false;
 
         formElt.addEventListener("submit", function(evenement) {
             evenement.preventDefault();
@@ -109,9 +138,45 @@ class Book {
 
             var nbBike = RegExp.$1;
 
+
             if(nbBike > 1) {
-                canvas.running();
-            }
+
+                var canvasActivation = canvas.running();
+
+                // Available the booking
+                canvas_containerElt.onclick = function() {
+                	booked = true;
+                }
+
+                // Close canvas
+                inputCancel.onclick = function() {
+					canvas.resetText(); // Delete error message
+					canvas.cancelCanvas();
+				}
+				// Clean the canvas
+				inputErase.onclick = function() {
+					canvas.resetText(); // Delete error message
+					canvas.resize();
+				}
+
+				// Browser resizing
+				window.onresize = canvas.resize();
+
+				inputValidate.onclick = function() {
+					if(booked) {
+						canvas.validationCanvas();
+						this.deleteBooking(); // Delete a previous booking
+						canvas.cancelCanvas();
+						setTimeout(this.addBooking, 1500); // Have time to delete a booking before adding
+					}
+					else {
+						canvas.errorCanvas();
+					}
+				} // End inputValidate
+
+
+
+            } // End if nbBike
             else {
                 alert('Aucun vélo disponible.');
             }
@@ -146,7 +211,7 @@ class Book {
 	        timerElt.textContent = "Temps restant: ";
 	        minElt.textContent = sessionStorage.timerMin + " min ";
 	        secElt.textContent = sessionStorage.timerSec + "s ";
-	        bookObject.timer();
+	        this.timer();
         }
 
 	} // End bookingPageRefresh
