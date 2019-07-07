@@ -36,7 +36,7 @@ class Data {
         else if(available_bikes > 3 && available_bikes < 6) {
             var markerCity = L.marker(this.coord, {icon: yellowIcon}).addTo(map);
         }
-        else if(available_bikes > 4) {
+        else if(available_bikes > 5) {
             var markerCity = L.marker(this.coord, {icon: grayIcon}).addTo(map);
         }
 

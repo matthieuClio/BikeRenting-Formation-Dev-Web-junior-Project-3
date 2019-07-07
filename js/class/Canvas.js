@@ -7,31 +7,52 @@
 
 class Canvas {
 
-	canvas = document.querySelector("canvas");
+	booking_dataElt = document.getElementById("address_st"); // Booking adress
+	input_nameElt = document.getElementById("name");
+	input_first_nameElt = document.getElementById("firstName");
+	inputDeleteElt = document.getElementById("input_deleteId");
+	canvasElt = document.querySelector("canvas");
 	canvas_container = document.getElementById("canvas_container");
 	error_message = document.getElementById("error_message");
-	booked = false;
-	context = this.canvas.getContext('2d');
+	input_delete = document.getElementById("input_deleteId");
+	booking_sectionElt = document.getElementById("booked"); // Booking location
+	timerSectionElt = document.getElementById("timer_section");
+	timerElt = document.getElementById("timer");
+	minElt = document.getElementById("min");
+	secElt = document.getElementById("sec");
+	context = this.canvasElt.getContext('2d');
 	radius = 5;
 	dragging = false;
-
+	timerMin = 20;
+	timerSec = '00';
 
 	constructor() {
-
-		let canvas = this.canvas;
+		let booking_dataElt = this.booking_dataElt;
+		let input_nameElt = this.input_nameElt;
+		let input_first_nameElt = this.nput_first_nameElt;
+		let inputDeleteElt = this.inputDeleteElt;
+		let canvasElt = this.canvasElt;
 		let canvas_container = this.canvas_container;
 		let error_message = this.error_message;
+		let input_delete = this.input_delete;
+		let booking_sectionElt = this.booking_sectionElt;
+		let timerSectionElt = this.booking_sectionElt;
 		let context = this.context;
 		let radius = this.radius;
 		let dragging = this.dragging;
+		let timerElt = this.timerElt;
+		let minElt = this.minElt;
+		let secElt = this.secElt;
+		let timerMin = this.timerMin;
+		let timerSec = this.timerSec;
     }
 
     // Method running
     running() {
 
 		this.canvas_container.style.display = "block";
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = "500";
+		this.canvasElt.width = window.innerWidth;
+		this.canvasElt.height = "500";
 		this.context.lineWidth = this.radius*2;
 
 		// Define some variables for be used in functions !
@@ -79,22 +100,22 @@ class Canvas {
 		if (screen.width > 1279) {
 			// Event mouse on canvas
 
-			putPoint();
+			//putPoint();
 
-			this.canvas.addEventListener('mousedown', enalble);
-			this.canvas.addEventListener('mousedown', putPoint);
-			this.canvas.addEventListener('mousemove', putPoint);
-			this.canvas.addEventListener('mouseup', disable);
-			this.canvas.addEventListener("mouseout", disable);
+			this.canvasElt.addEventListener('mousedown', enalble);
+			this.canvasElt.addEventListener('mousedown', putPoint);
+			this.canvasElt.addEventListener('mousemove', putPoint);
+			this.canvasElt.addEventListener('mouseup', disable);
+			this.canvasElt.addEventListener("mouseout", disable);
 		}
 
 		// Dragging for tablet - Mobile
 		else if (screen.width <= 1279) {
 
 			// Event tactile on canvas
-			this.canvas.addEventListener('touchstart', enalble);
-			this.canvas.addEventListener('touchmove', putPoint);
-			this.canvas.addEventListener('touchend', disable);
+			this.canvasElt.addEventListener('touchstart', enalble);
+			this.canvasElt.addEventListener('touchmove', putPoint);
+			this.canvasElt.addEventListener('touchend', disable);
 		}
 
     } // End running()
@@ -111,8 +132,8 @@ class Canvas {
 
     // Method resize
     resize() {
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = "500";
+		this.canvasElt.width = window.innerWidth;
+		this.canvasElt.height = "500";
 		this.context.lineWidth = this.radius*2;
     }
 
@@ -125,5 +146,54 @@ class Canvas {
     errorCanvas() {
     	this.error_message.textContent = "Vous devez signer pour valider";
     }
+
+    // Method deleteBooking
+    deleteBooking() {
+		this.booking_sectionElt.textContent = "Pas de réservation";
+		this.input_delete.style.display = "none";
+		this.timerSectionElt.style.display = "none";
+		sessionStorage.clear();
+    }
+
+    addBooking() {
+
+		let input_nameElt = this.input_nameElt;
+		let input_first_nameElt = this.input_first_nameElt;
+		let booking_dataElt = this.booking_dataElt;
+		let minElt = this.minElt;
+		let secElt = this.secElt;
+		let timerElt = this.timerElt;
+		let timerMin = this.timerMin;
+		let timerSec = this.timerSec;
+		let booking_sectionElt = this.booking_sectionElt;
+		let timerSectionElt = this.timerSectionElt;
+		let inputDeleteElt = this.inputDeleteElt;
+
+
+    	function booking() {
+
+			localStorage.setItem("name", input_nameElt.value);
+			localStorage.setItem("first_name", input_first_nameElt.value);
+			sessionStorage.setItem("booking", booking_dataElt.textContent + ", Réservé par: " + input_nameElt.value + " " + input_first_nameElt.value);
+			sessionStorage.setItem("timerMin", timerMin);
+			sessionStorage.setItem("timerSec", timerSec);
+
+			booking_sectionElt.textContent = sessionStorage.booking;
+			timerElt.textContent = "Temps restant: ";
+			minElt.textContent = sessionStorage.timerMin + " min ";
+			secElt.textContent = sessionStorage.timerSec + "s ";
+
+			timerSectionElt.style.display = "block";
+			inputDeleteElt.style.display = "inline-block";
+		}
+
+		setTimeout(function() {
+			booking(this.input_nameElt, this.input_first_nameElt, this.booking_dataElt, this.minElt, this.secElt, this.timerElt, this.timerMin, this.timerSec, 
+			this.booking_sectionElt, this.inputDeleteElt, this.timerSectionElt);
+			
+
+		}, 1500); // Have time to delete a booking before adding
+
+	} // End method addBooking
 
 } // End class Canvas

@@ -6,7 +6,14 @@
 //...
 
 class Book {
-
+		canvas_containerElt = document.querySelector("canvas");
+		formElt = document.getElementById("form_");
+		inputCancel = document.getElementById("input_cancel");
+		inputErase = document.getElementById("input_erase");
+		inputValidate = document.getElementById("input_validate");
+		input_name = document.getElementById("name");
+        input_first_name = document.getElementById("firstName");
+        booking_section = document.getElementById("booked");
 		booking_dataElt = document.getElementById("address_st"); // Booking adress
 		booking_sectionElt = document.getElementById("booked"); // Booking location
 		input_nameElt = document.getElementById("name");
@@ -16,120 +23,62 @@ class Book {
 		timerElt = document.getElementById("timer");
 		minElt = document.getElementById("min");
 		secElt = document.getElementById("sec");
+		input_delete = document.getElementById("input_deleteId");
+		booked = false;
 		timerMin = 20;
 		timerSec = '00';
+		// Object
+		canvas = new Canvas(); // js/class/Canvas.js
+		timer = new Timer();
 
 	constructor() {
-		var booking_dataElt = this.booking_dataElt;
-		var booking_sectionElt = this.booking_dataElt;
-		var input_nameElt = this.input_nameElt;
-		var input_first_nameElt = this.nput_first_nameElt;
-		var inputDeleteElt = this.inputDeleteElt;
-		var timerSectionElt = this.imerSectionElt;
-		var timerElt = this.timerElt;
-		var minElt = this.minElt;
-		var secElt = this.ecElt;
-		var timerMin = this.timerMin;
-		var timerSec = this.timerSec;
-	}
-
-	addBooking() {
-		/*var booking_dataElt = document.getElementById("address_st"); // Booking adress
-		var booking_sectionElt = document.getElementById("booked"); // Booking location
-		var input_nameElt = document.getElementById("name");
-		var input_first_nameElt = document.getElementById("firstName");
-		var inputDeleteElt = document.getElementById("input_deleteId");
-		var timerSectionElt = document.getElementById("timer_section");
-		var timerElt = document.getElementById("timer");
-		var minElt = document.getElementById("min");
-		var secElt = document.getElementById("sec");
-
-		var timerMin = 20;
-		var timerSec = '00'; */
-
-		//console.log(input_nameElt);
-		localStorage.setItem("name", this.input_nameElt.value);
-		localStorage.setItem("first_name", this.input_first_nameElt.value);
-		sessionStorage.setItem("booking", this.booking_dataElt.textContent + ", Réservé par: " + this.input_nameElt.value + " " + this.input_first_nameElt.value);
-		sessionStorage.setItem("timerMin", this.timerMin);
-		sessionStorage.setItem("timerSec", this.timerSec);
-
-		this.booking_sectionElt.textContent = sessionStorage.booking;
-		this.timerElt.textContent = "Temps restant: ";
-		this.minElt.textContent = sessionStorage.timerMin + " min ";
-		this.secElt.textContent = sessionStorage.timerSec + "s ";
-
-		this.timerSectionElt.style.display = "block";
-		this.inputDeleteElt.style.display = "inline-block";
-
-		// Start the timer
-		this.timer();
-	}
-
-	deleteBooking() {
-		var booking_sectionElt = document.getElementById("booked"); // Booking location
-		var input_delete = document.getElementById("input_deleteId");
-		var timerSectionElt = document.getElementById("timer_section");
-
-		booking_sectionElt.textContent = "Pas de réservation";
-		input_delete.style.display = "none";
-		timerSectionElt.style.display = "none";
-		sessionStorage.clear();
+		let canvas_containerElt = this.canvas_containerElt;
+		let formElt = this.formElt;
+		let inputCancel = this.inputCancel;
+		let inputErase = this.inputErase;
+		let inputValidate = this.inputValidate;
+		let input_name = this.input_name;
+		let input_first_name = this.input_first_name;
+		let booking_section = this.booking_section;
+		let booking_dataElt = this.booking_dataElt;
+		let booking_sectionElt = this.booking_dataElt;
+		let input_nameElt = this.input_nameElt;
+		let input_first_nameElt = this.nput_first_nameElt;
+		let inputDeleteElt = this.inputDeleteElt;
+		let timerSectionElt = this.imerSectionElt;
+		let timerElt = this.timerElt;
+		let minElt = this.minElt;
+		let secElt = this.ecElt;
+		let input_delete = this.input_delete;
+		let booked = this.booked;
+		let timerMin = this.timerMin;
+		let timerSec = this.timerSec;
+		// Object
+		let canvas = this.canvas; // js/class/Canvas.js
+		let timer = this.timer;
+		
 	}
 
 	inputDeleteBooking() {
-		var input_delete = document.getElementById("input_deleteId");
+
+		let canvas = this.canvas;
 		
-		input_delete.onclick = function() {
-            this.deleteBooking();
+		this.input_delete.onclick = function() {
+            canvas.deleteBooking();
         }
 	}
 
-	timer() {
-		var timerBooked;
-		timerBooked = setInterval(timerRule, 1000);
-
-		function timerRule() {
-			var minElt = document.getElementById("min");
-			var secElt = document.getElementById("sec");
-
-			if(sessionStorage.timerMin) {
-
-				if(sessionStorage.timerMin != 0 || sessionStorage.timerMin == 0 && sessionStorage.timerSec != 0) {
-
-					if(sessionStorage.timerSec == 0) {
-						sessionStorage.timerMin--;
-						sessionStorage.timerSec = 60;
-
-						minElt.textContent = sessionStorage.timerMin + " min ";
-						secElt.textContent = sessionStorage.timerSec + "s ";
-					}
-					else {
-						sessionStorage.timerSec--;
-						secElt.textContent = sessionStorage.timerSec + "s ";
-					}
-				}
-				else {
-					clearInterval(timerBooked);
-					this.deleteBooking();
-				}
-			}
-			else {
-				clearInterval(timerBooked);
-			}
-		} // End function timerRule
-	} // End method timer
-
 	bookingButton() {
-		var canvas_containerElt = document.querySelector("canvas");
-		var formElt = document.getElementById("form_");
-		var inputCancel = document.getElementById("input_cancel");
-		var inputErase = document.getElementById("input_erase");
-		var inputValidate = document.getElementById("input_validate");
-        var canvas = new Canvas(); // js/class/Canvas.js
-        var booked = false;
 
-        formElt.addEventListener("submit", function(evenement) {
+		let canvas_containerElt = this.canvas_containerElt;
+		let inputCancel = this.inputCancel;
+		let inputErase = this.inputErase;
+		let inputValidate = this.inputValidate;
+        let canvas = this.canvas // js/class/Canvas.js
+        let timer = this.timer // js/class/Timer.js
+        let booked = this.booked;
+
+        this.formElt.addEventListener("submit", function(evenement) {
             evenement.preventDefault();
 
             var statusBikeInfoElt = document.getElementById("status_bike");
@@ -147,7 +96,6 @@ class Book {
                 canvas_containerElt.onclick = function() {
                 	booked = true;
                 }
-
                 // Close canvas
                 inputCancel.onclick = function() {
 					canvas.resetText(); // Delete error message
@@ -165,16 +113,15 @@ class Book {
 				inputValidate.onclick = function() {
 					if(booked) {
 						canvas.validationCanvas();
-						this.deleteBooking(); // Delete a previous booking
+						canvas.deleteBooking(); // Delete a previous booking
 						canvas.cancelCanvas();
-						setTimeout(this.addBooking, 1500); // Have time to delete a booking before adding
+						canvas.addBooking();
+						timer.running();
 					}
 					else {
 						canvas.errorCanvas();
 					}
 				} // End inputValidate
-
-
 
             } // End if nbBike
             else {
@@ -184,34 +131,24 @@ class Book {
 	}
 
 	inputPageRefresh() {
-
-		var input_name = document.getElementById("name");
-        var input_first_name = document.getElementById("firstName");
         
 	    if(localStorage.name && localStorage.first_name) {
-			input_name.value = localStorage.name;
-	        input_first_name.value = localStorage.first_name;
+			this.input_name.value = localStorage.name;
+	        this.input_first_name.value = localStorage.first_name;
 	    }
 	}
 
 	bookingPageRefresh() {
 
-		var booking_section = document.getElementById("booked");
-        var input_delete = document.getElementById("input_deleteId");
-        var timerSectionElt = document.getElementById("timer_section");
-        var timerElt = document.getElementById("timer");
-        var minElt = document.getElementById("min");
-        var secElt = document.getElementById("sec");
-
         if(sessionStorage.booking) {
-        	booking_section.textContent = sessionStorage.booking;
-	        input_delete.style.display = "inline-block";
+        	this.booking_section.textContent = sessionStorage.booking;
+	        this.input_delete.style.display = "inline-block";
 
-	        timerSectionElt.style.display = "block";
-	        timerElt.textContent = "Temps restant: ";
-	        minElt.textContent = sessionStorage.timerMin + " min ";
-	        secElt.textContent = sessionStorage.timerSec + "s ";
-	        this.timer();
+	        this.timerSectionElt.style.display = "block";
+	        this.timerElt.textContent = "Temps restant: ";
+	        this.minElt.textContent = sessionStorage.timerMin + " min ";
+	        this.secElt.textContent = sessionStorage.timerSec + "s ";
+	        this.timer.running();
         }
 
 	} // End bookingPageRefresh
