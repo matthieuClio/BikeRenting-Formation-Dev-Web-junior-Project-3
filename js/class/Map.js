@@ -6,15 +6,32 @@
 //...
 
 class Map {
+
+	coord_creteil = [48.785978155614686, 2.4594506630437536];
+	grayIcon;
+	yellowIcon;
+	zoomInputElt = document.getElementById("input_zoom");
+	zoom = false;
+	api_key = "ae736ed0d94957d43a63928cee44631af6036511";
+
 	constructor() {
+		// Coordinate
+		let coord_creteil = this.coord_creteil;
+		let grayIcon = this.grayIcon;
+		let yellowIcon = this.yellowIcon;
+		let orangeIcon = this.orangeIcon;
+		let redIcon = this.redIcon;
+		let zoomInputElt = this.zoomInputElt;
+		let zoom = this.zoom;
+		let api_key = this.api_key;
 	}
 
 	addMap() {
 		// Coordinate
-		var coord_creteil = [48.785978155614686, 2.4594506630437536];
+		//var coord_creteil = [48.785978155614686, 2.4594506630437536];
 
 		// Map creation
-		var map = L.map('map', {dragging: !L.Browser.mobile}).setView(coord_creteil, 14);
+		var map = L.map('map', {dragging: !L.Browser.mobile}).setView(this.coord_creteil, 14);
 
 		return map;
 	}
@@ -28,7 +45,7 @@ class Map {
 
 	mapIconsGray() {
 		// Custom Icons
-		var grayIcon = L.icon({
+		this.grayIcon = L.icon({
 		    iconUrl: 'images/icon_map/bike_icone.png',
 		    shadowUrl: 'images/icon_map/leaf-shadow.png',
 
@@ -39,13 +56,13 @@ class Map {
 		    popupAnchor:  [2, -90] // point from which the popup should open relative to the iconAnchor
 		});
 
-		return grayIcon;
+		return this.grayIcon;
 	} // End mapIconsGreen
 
 
 	mapIconsYellow() {
 		// Custom Icons
-		var yellowIcon = L.icon({
+		this.yellowIcon = L.icon({
 		    iconUrl: 'images/icon_map/bike_icone_middle.png',
 		    shadowUrl: 'images/icon_map/leaf-shadow.png',
 
@@ -56,13 +73,13 @@ class Map {
 		    popupAnchor:  [2, -90] // point from which the popup should open relative to the iconAnchor
 		});
 
-		return yellowIcon;
+		return this.yellowIcon;
 	} // End mapIconsOrange
 
 
 	mapIconsOrange() {
 		// Custom Icons
-		var orangeIcon = L.icon({
+		this.orangeIcon = L.icon({
 		    iconUrl: 'images/icon_map/bike_icone_low.png',
 		    shadowUrl: 'images/icon_map/leaf-shadow.png',
 
@@ -73,13 +90,13 @@ class Map {
 		    popupAnchor:  [2, -90] // point from which the popup should open relative to the iconAnchor
 		});
 
-		return orangeIcon;
+		return this.orangeIcon;
 	} // End mapIconsOrange
 
 
 	mapIconsRed() {
 		// Custom Icons
-		var redIcon = L.icon({
+		this.redIcon = L.icon({
 		    iconUrl: 'images/icon_map/bike_icone_none.png',
 		    shadowUrl: 'images/icon_map/leaf-shadow.png',
 
@@ -90,14 +107,13 @@ class Map {
 		    popupAnchor:  [2, -90] // point from which the popup should open relative to the iconAnchor
 		});
 
-		return redIcon;
+		return this.redIcon;
 	} // End mapIconsRed
 
 
 	mapZoom() {
 		//variable
-		var zoomInputElt = document.getElementById("input_zoom");
-		var zoom = false;
+		let zoom = this.zoom;
 
 		// Base state of zoom and drag
 		map.scrollWheelZoom.disable();
@@ -112,7 +128,7 @@ class Map {
 			map.dragging.disable();
 		}
 		
-		zoomInputElt.onclick = function() {
+		this.zoomInputElt.onclick = function() {
 		    if(!zoom) {
 		        map.scrollWheelZoom.enable();
 		        zoom = true;
@@ -125,5 +141,32 @@ class Map {
 		}
 
 	} // End mapZoom
+
+	marker_data() {
+        // Ajax request
+        ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Creteil&apiKey=" + this.api_key,
+            function (reponse) {
+
+                let data = JSON.parse(reponse);
+                let counter = 0;
+                
+                // Creating objects
+                while(counter != data.length) {
+                    let lat_lng = [data[counter].position.lat, data[counter].position.lng];
+                    let city = data[counter].contract_name;
+                    let name_address = data[counter].address;
+                    let street = data[counter].name;
+                    let status_station = data[counter].status;
+                    let nb_avail_bikes = data[counter].available_bikes;
+                    // Objet
+                    let stationObject = new Station(lat_lng, city, street, name_address, status_station, nb_avail_bikes);
+                    stationObject.add_marker(lat_lng, city, street, name_address, status_station, nb_avail_bikes);
+                    counter++;
+                }
+
+            } // End function
+        ); // AjaxGet
+        
+    } // End marker_data
 
 } // End class Map

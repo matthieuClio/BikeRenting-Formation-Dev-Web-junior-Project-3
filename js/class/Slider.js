@@ -41,105 +41,40 @@ class Slider {
 	// Method running
 	running() {
 
-		// Use default values
-		var maxLeft = this.maxLeft;
-		var maxRight = this.maxRight;
-		var slideSize = this.slideSize;
-		// Variable
-		//var nextSlide = this.nextSlide;
-		var maxSlide = this.maxSlide;
-		var sliderContainerElt = this.sliderContainerElt;
-		var rightButtonElt = this.rightButtonElt;
-		var leftButtonElt = this.leftButtonElt;
-		var containerMainElt = this.containerMainElt;
-		var containerButtonElt = this.containerButtonElt;
-		var pauseButtonElt = this.pauseButtonElt;
-		var playButtonElt = this.playButtonElt;
-
-
 		// Pause button
 		//...
+		this.containerMainElt.onmouseover = this.PauseDisplay.bind(this);
+		this.containerMainElt.onmouseout = this.PauseHidden.bind(this);
 
-		containerMainElt.onmouseover = function() {
-			containerButtonElt.style.display = "block";
-		}
-
-		containerMainElt.onmouseout = function() {
-			containerButtonElt.style.display = "none";
-		}
-		containerButtonElt.onclick = this.pauseSlider.bind(this);
+		this.containerButtonElt.onclick = this.pauseSlider.bind(this);
 
 		// Right button
 		//...
-		rightButtonElt.onclick = this.rightButton.bind(this);
+		this.rightButtonElt.onclick = this.rightButton.bind(this);
 
 		// Left button
 		//...
-		leftButtonElt.onclick = this.leftButton.bind(this);
+		this.leftButtonElt.onclick = this.leftButton.bind(this);
 
 		// Keyboard
 		//...
-		containerMainElt.onkeydown = function() {
+		this.containerMainElt.onkeydown = this.keyboardToutch.bind(this);
 
-			if(event.keyCode == 39) { // KeyCode: right spire
-
-				if(sliderContainerElt.style.left) {
-					var leftSlider = sliderContainerElt.style.left;
-				}
-				else {
-					var leftSlider = getComputedStyle(sliderContainerElt).left;
-				}
-
-				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
-
-				if(leftSliderInt > maxRight) {
-					leftSliderInt = leftSliderInt-slideSize;
-					sliderContainerElt.style.left = leftSliderInt + "%";
-
-					if(leftSliderInt == maxRight) {
-						maxSlide = true;
-					}
-				}
-				// Pause button
-				this.pause = true;
-				pauseButtonElt.style.display = "none";
-				playButtonElt.style.display = "block";
-				clearInterval(this.nextSlide);
-			}
-
-			else if(event.keyCode == 37) { // KeyCode: left spire
-				
-				if(sliderContainerElt.style.left) {
-					var leftSlider = sliderContainerElt.style.left;
-				}
-				else {
-					var leftSlider = getComputedStyle(sliderContainerElt).left;
-				}
-
-				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
-
-				if(leftSliderInt < maxLeft) {
-					leftSliderInt = leftSliderInt+slideSize;
-					sliderContainerElt.style.left = leftSliderInt + "%";
-
-					if(leftSliderInt == maxLeft) {
-						maxSlide = false;
-					}
-				}
-				// Pause button
-				this.pause = true;
-				pauseButtonElt.style.display = "none";
-				playButtonElt.style.display = "block";
-				clearInterval(this.nextSlide);
-			}
-		} // End containerMainElt.onkeydown
-
+		// Mode auto
 		this.automaticMode();
-
 	} // End method running
 
-	automaticMode() {
+	// Method PauseDisplay
+	PauseDisplay() {
+		this.containerButtonElt.style.display = "block";
+	}
 
+	// Method PauseHidden
+	PauseHidden() {
+		this.containerButtonElt.style.display = "none";
+	}
+
+	automaticMode() {
 		let sliderContainerElt = this.sliderContainerElt;
 		let maxLeft = this.maxLeft;
 		let maxSlide = this.maxSlide;
@@ -147,7 +82,6 @@ class Slider {
 		let slideSize = this.slideSize;
 
 		function auto() {
-			console.log('ok');
 			if(sliderContainerElt.style.left) {
 				var leftSlider = sliderContainerElt.style.left;
 			}
@@ -197,7 +131,6 @@ class Slider {
 
 	// Method rightButton
 	rightButton() {
-		console.log('right');
 		if(this.sliderContainerElt.style.left) {
 			var leftSlider = this.sliderContainerElt.style.left;
 		}
@@ -226,7 +159,6 @@ class Slider {
 
 	// Method leftButton
 		leftButton() {
-			console.log('left');
 			if(this.sliderContainerElt.style.left) {
 				var leftSlider = this.sliderContainerElt.style.left;
 			}
@@ -252,5 +184,59 @@ class Slider {
 			// Stop automaticMode
 			clearInterval(this.nextSlide);
 		} // End leftButton
+
+		// Method keyboardToutch
+		keyboardToutch() {
+			if(event.keyCode == 39) { // KeyCode: right spire
+				if(this.sliderContainerElt.style.left) {
+					var leftSlider = this.sliderContainerElt.style.left;
+				}
+				else {
+					var leftSlider = getComputedStyle(this.sliderContainerElt).left;
+				}
+
+				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
+
+				if(leftSliderInt > this.maxRight) {
+					leftSliderInt = leftSliderInt-this.slideSize;
+					this.sliderContainerElt.style.left = leftSliderInt + "%";
+
+					if(leftSliderInt == this.maxRight) {
+						this.maxSlide = true;
+					}
+				}
+				// Pause button
+				this.pause = true;
+				this.pauseButtonElt.style.display = "none";
+				this.playButtonElt.style.display = "block";
+				clearInterval(this.nextSlide);
+			}
+
+			else if(event.keyCode == 37) { // KeyCode: left spire
+				
+				if(this.sliderContainerElt.style.left) {
+					var leftSlider = this.sliderContainerElt.style.left;
+				}
+				else {
+					var leftSlider = getComputedStyle(this.sliderContainerElt).left;
+				}
+
+				var leftSliderInt = parseInt(leftSlider); // Convert the input strings into int
+
+				if(leftSliderInt < this.maxLeft) {
+					leftSliderInt = leftSliderInt+this.slideSize;
+					this.sliderContainerElt.style.left = leftSliderInt + "%";
+
+					if(leftSliderInt == this.maxLeft) {
+						this.maxSlide = false;
+					}
+				}
+				// Pause button
+				this.pause = true;
+				this.pauseButtonElt.style.display = "none";
+				this.playButtonElt.style.display = "block";
+				clearInterval(this.nextSlide);
+			}
+		} // End Method keyboardToutch
 
 } // End class Slider

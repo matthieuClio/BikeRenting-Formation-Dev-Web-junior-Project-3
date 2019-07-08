@@ -28,13 +28,10 @@ var redIcon = mapObject.mapIconsRed();
 mapObject.mapZoom();
 
 
-// Data object
-//...
-//...
-var marker = new Data(); // js/class/Data.js
-
 // Ajax request
-marker.marker_data();
+//...
+//...
+mapObject.marker_data();
 
 
 // Booking object

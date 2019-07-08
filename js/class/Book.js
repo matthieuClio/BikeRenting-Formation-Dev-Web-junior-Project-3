@@ -88,7 +88,7 @@ class Book {
             var nbBike = RegExp.$1;
 
 
-            if(nbBike > 1) {
+            if(nbBike > 0) {
 
                 var canvasActivation = canvas.running();
 
