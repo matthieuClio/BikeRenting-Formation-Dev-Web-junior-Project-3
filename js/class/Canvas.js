@@ -60,62 +60,22 @@ class Canvas {
 		let context = this.context;
 		let radius = this.radius;
 
-
-		function putPoint(e) {
-			if(dragging) {
-
-				if (screen.width > 1279) {
-					context.lineTo(e.clientX, e.clientY);
-					context.stroke();
-					context.beginPath();
-					context.arc(e.clientX, e.clientY, radius, 0, Math.PI*2);
-					context.fill();
-					context.beginPath();
-					context.moveTo(e.clientX, e.clientY);
-				}
-				else if (screen.width <= 1279) {
-					e.preventDefault();
-					context.lineTo(e.touches[0].clientX, e.touches[0].clientY);
-					context.stroke();
-					context.beginPath();
-					context.arc(e.touches[0].clientX, e.touches[0].clientY, radius, 0, Math.PI*2);
-					context.fill();
-					context.beginPath();
-					context.moveTo(e.touches[0].clientX, e.touches[0].clientY);
-				}
-			}	// End dragging
-
-		}	// End function putPoint
-	
-		function enalble(e) {
-			dragging = true;
-			putPoint(e);
-		}
-
-		function disable() {
-			dragging = false;
-			context.beginPath();
-		}
-
 		if (screen.width > 1279) {
 			// Event mouse on canvas
-
-			//putPoint();
-
-			this.canvasElt.addEventListener('mousedown', enalble);
-			this.canvasElt.addEventListener('mousedown', putPoint);
-			this.canvasElt.addEventListener('mousemove', putPoint);
-			this.canvasElt.addEventListener('mouseup', disable);
-			this.canvasElt.addEventListener("mouseout", disable);
+			this.canvasElt.addEventListener('mousedown', this.enalble.bind(this));
+			this.canvasElt.addEventListener('mousedown', this.putPoint.bind(this));
+			this.canvasElt.addEventListener('mousemove', this.putPoint.bind(this));
+			this.canvasElt.addEventListener('mouseup', this.disable.bind(this));
+			this.canvasElt.addEventListener('mouseout', this.disable.bind(this));
 		}
 
 		// Dragging for tablet - Mobile
 		else if (screen.width <= 1279) {
 
 			// Event tactile on canvas
-			this.canvasElt.addEventListener('touchstart', enalble);
-			this.canvasElt.addEventListener('touchmove', putPoint);
-			this.canvasElt.addEventListener('touchend', disable);
+			this.canvasElt.addEventListener('touchstart', this.enalble.bind(this));
+			this.canvasElt.addEventListener('touchmove', this.putPoint.bind(this));
+			this.canvasElt.addEventListener('touchend', this.disable.bind(this));
 		}
 
     } // End running()
@@ -155,6 +115,7 @@ class Canvas {
 		sessionStorage.clear();
     }
 
+    // Method addBooking
     addBooking() {
 
 		let input_nameElt = this.input_nameElt;
@@ -195,5 +156,48 @@ class Canvas {
 		}, 1500); // Have time to delete a booking before adding
 
 	} // End method addBooking
+
+	// Method enalble
+	enalble(e) {
+		this.dragging = true;
+		putPoint(e);
+	}
+
+	// Method putPoint
+	putPoint(e) {
+		let context = this.context;
+		let radius = this.radius;
+
+		if(this.dragging) {
+
+			if (screen.width > 1279) {
+				context.lineTo(e.clientX, e.clientY);
+				context.stroke();
+				context.beginPath();
+				context.arc(e.clientX, e.clientY, radius, 0, Math.PI*2);
+				context.fill();
+				context.beginPath();
+				context.moveTo(e.clientX, e.clientY);
+			}
+			else if (screen.width <= 1279) {
+				e.preventDefault();
+				context.lineTo(e.touches[0].clientX, e.touches[0].clientY);
+				context.stroke();
+				context.beginPath();
+				context.arc(e.touches[0].clientX, e.touches[0].clientY, radius, 0, Math.PI*2);
+				context.fill();
+				context.beginPath();
+				context.moveTo(e.touches[0].clientX, e.touches[0].clientY);
+			}
+		}	// End dragging
+	}	// End function putPoint
+
+	// Method disable
+	disable() {
+		let context = this.context;
+
+		this.dragging = false;
+		context.beginPath();
+	}
 
 } // End class Canvas
