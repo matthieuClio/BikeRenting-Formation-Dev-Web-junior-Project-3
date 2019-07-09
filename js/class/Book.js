@@ -96,6 +96,9 @@ class Book {
                 canvas_containerElt.onclick = function() {
                 	booked = true;
                 }
+                canvas_containerElt.ontouchstart = function() {
+                	booked = true;
+                }
                 // Close canvas
                 inputCancel.onclick = function() {
 					canvas.resetText(); // Delete error message
