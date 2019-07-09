@@ -24,6 +24,7 @@ class Map {
 		let zoomInputElt = this.zoomInputElt;
 		let zoom = this.zoom;
 		let api_key = this.api_key;
+		let stationObject = this.stationObject;
 	}
 
 	addMap() {
@@ -143,8 +144,10 @@ class Map {
 	} // End mapZoom
 
 	marker_data() {
+		let api_key = this.api_key;
+		let stationObject = this.stationObject;
         // Ajax request
-        ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Creteil&apiKey=" + this.api_key,
+        ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Creteil&apiKey=" + api_key,
             function (reponse) {
 
                 let data = JSON.parse(reponse);

@@ -105,6 +105,8 @@ class Book {
 				inputErase.onclick = function() {
 					canvas.resetText(); // Delete error message
 					canvas.resize();
+
+					booked = false;
 				}
 
 				// Browser resizing
@@ -117,6 +119,8 @@ class Book {
 						canvas.cancelCanvas();
 						canvas.addBooking();
 						timer.running();
+
+						booked = false;
 					}
 					else {
 						canvas.errorCanvas();

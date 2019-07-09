@@ -160,7 +160,7 @@ class Canvas {
 	// Method enalble
 	enalble(e) {
 		this.dragging = true;
-		putPoint(e);
+		this.putPoint(e);
 	}
 
 	// Method putPoint
