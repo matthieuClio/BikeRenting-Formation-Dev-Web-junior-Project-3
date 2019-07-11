@@ -7,44 +7,25 @@
 
 class Canvas {
 
-	booking_dataElt = document.getElementById("address_st"); // Booking adress
-	input_nameElt = document.getElementById("name");
-	input_first_nameElt = document.getElementById("firstName");
-	inputDeleteElt = document.getElementById("input_deleteId");
-	canvasElt = document.querySelector("canvas");
-	canvas_container = document.getElementById("canvas_container");
-	error_message = document.getElementById("error_message");
-	input_delete = document.getElementById("input_deleteId");
-	booking_sectionElt = document.getElementById("booked"); // Booking location
-	timerSectionElt = document.getElementById("timer_section");
-	timerElt = document.getElementById("timer");
-	minElt = document.getElementById("min");
-	secElt = document.getElementById("sec");
-	context = this.canvasElt.getContext('2d');
-	radius = 5;
-	dragging = false;
-	timerMin = 20;
-	timerSec = '00';
-
 	constructor() {
-		let booking_dataElt = this.booking_dataElt;
-		let input_nameElt = this.input_nameElt;
-		let input_first_nameElt = this.nput_first_nameElt;
-		let inputDeleteElt = this.inputDeleteElt;
-		let canvasElt = this.canvasElt;
-		let canvas_container = this.canvas_container;
-		let error_message = this.error_message;
-		let input_delete = this.input_delete;
-		let booking_sectionElt = this.booking_sectionElt;
-		let timerSectionElt = this.booking_sectionElt;
-		let context = this.context;
-		let radius = this.radius;
-		let dragging = this.dragging;
-		let timerElt = this.timerElt;
-		let minElt = this.minElt;
-		let secElt = this.secElt;
-		let timerMin = this.timerMin;
-		let timerSec = this.timerSec;
+		this.booking_dataElt = document.getElementById("address_st"); // Booking adress
+		this.input_nameElt = document.getElementById("name");
+		this.input_first_nameElt = document.getElementById("firstName");
+		this.inputDeleteElt = document.getElementById("input_deleteId");
+		this.canvasElt = document.querySelector("canvas");
+		this.canvas_container = document.getElementById("canvas_container");
+		this.error_message = document.getElementById("error_message");
+		this.input_delete = document.getElementById("input_deleteId");
+		this.booking_sectionElt = document.getElementById("booked"); // Booking location
+		this.timerSectionElt = document.getElementById("timer_section");
+		this.timerElt = document.getElementById("timer");
+		this.minElt = document.getElementById("min");
+		this.secElt = document.getElementById("sec");
+		this.context = this.canvasElt.getContext('2d');
+		this.radius = 5;
+		this.dragging = false;
+		this.timerMin = 20;
+		this.timerSec = '00';
     }
 
     // Method running
@@ -54,11 +35,6 @@ class Canvas {
 		this.canvasElt.width = window.innerWidth;
 		this.canvasElt.height = "500";
 		this.context.lineWidth = this.radius*2;
-
-		// Define some variables for be used in functions !
-		let dragging = this.dragging;
-		let context = this.context;
-		let radius = this.radius;
 
 		if (screen.width > 1279) {
 			// Event mouse on canvas
@@ -118,6 +94,7 @@ class Canvas {
     // Method addBooking
     addBooking() {
 
+    	// Define some variable for be used on a function
 		let input_nameElt = this.input_nameElt;
 		let input_first_nameElt = this.input_first_nameElt;
 		let booking_dataElt = this.booking_dataElt;
@@ -165,39 +142,35 @@ class Canvas {
 
 	// Method putPoint
 	putPoint(e) {
-		let context = this.context;
-		let radius = this.radius;
 
 		if(this.dragging) {
 
 			if (screen.width > 1279) {
-				context.lineTo(e.clientX, e.clientY);
-				context.stroke();
-				context.beginPath();
-				context.arc(e.clientX, e.clientY, radius, 0, Math.PI*2);
-				context.fill();
-				context.beginPath();
-				context.moveTo(e.clientX, e.clientY);
+				this.context.lineTo(e.clientX, e.clientY);
+				this.context.stroke();
+				this.context.beginPath();
+				this.context.arc(e.clientX, e.clientY, this.radius, 0, Math.PI*2);
+				this.context.fill();
+				this.context.beginPath();
+				this.context.moveTo(e.clientX, e.clientY);
 			}
 			else if (screen.width <= 1279) {
 				e.preventDefault();
-				context.lineTo(e.touches[0].clientX, e.touches[0].clientY);
-				context.stroke();
-				context.beginPath();
-				context.arc(e.touches[0].clientX, e.touches[0].clientY, radius, 0, Math.PI*2);
-				context.fill();
-				context.beginPath();
-				context.moveTo(e.touches[0].clientX, e.touches[0].clientY);
+				this.context.lineTo(e.touches[0].clientX, e.touches[0].clientY);
+				this.context.stroke();
+				this.context.beginPath();
+				this.context.arc(e.touches[0].clientX, e.touches[0].clientY, this.radius, 0, Math.PI*2);
+				this.context.fill();
+				this.context.beginPath();
+				this.context.moveTo(e.touches[0].clientX, e.touches[0].clientY);
 			}
 		}	// End dragging
 	}	// End function putPoint
 
 	// Method disable
 	disable() {
-		let context = this.context;
-
 		this.dragging = false;
-		context.beginPath();
+		this.context.beginPath();
 	}
 
 } // End class Canvas

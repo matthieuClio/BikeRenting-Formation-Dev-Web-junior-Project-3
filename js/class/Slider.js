@@ -7,35 +7,23 @@
 
 class Slider {
 
-	maxLeft = 0;
-	maxRight = -200;
-	slideSize = 100;
-	nextSlide;
-	maxSlide = false;
-	pause = false;
-	sliderContainerElt = document.getElementById("slider_container");
-	rightButtonElt = document.getElementById("right_button");
-	leftButtonElt = document.getElementById("left_button");
-	containerMainElt = document.getElementById("container_main");
-	containerButtonElt = document.getElementById("container_button");
-	pauseButtonElt = document.getElementById("pause_button");
-	playButtonElt = document.getElementById("play_button");
+	
 
 	constructor() {
-
 		// Default values
-		let maxLeft = this.maxLeft;
-		let maxRight = this.maxLeft;
-		let slideSize = this.slideSize;
-		let nextSlide = this.nextSlide;
-		let maxSlide = this.maxSlide;
-		let sliderContainerElt = this.sliderContainerElt;
-		let rightButtonElt = this.rightButtonElt;
-		let leftButtonElt = this.leftButtonElt;
-		let containerMainElt = this.containerMainElt;
-		let pauseButtonElt = this.pauseButtonElt;
-		let playButtonElt = this.playButtonElt;
-		let pause = this.pause;
+		this.maxLeft = 0;
+		this.maxRight = -200;
+		this.slideSize = 100;
+		this.nextSlide;
+		this.maxSlide = false;
+		this.pause = false;
+		this.sliderContainerElt = document.getElementById("slider_container");
+		this.rightButtonElt = document.getElementById("right_button");
+		this.leftButtonElt = document.getElementById("left_button");
+		this.containerMainElt = document.getElementById("container_main");
+		this.containerButtonElt = document.getElementById("container_button");
+		this.pauseButtonElt = document.getElementById("pause_button");
+		this.playButtonElt = document.getElementById("play_button");
 	}
 
 	// Method running

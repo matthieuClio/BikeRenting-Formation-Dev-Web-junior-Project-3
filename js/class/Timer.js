@@ -1,16 +1,12 @@
 class Timer {
 
-	timerBooked;
-	minElt = document.getElementById("min");
-	secElt = document.getElementById("sec");
-	// Object
-	canvas = new Canvas(); // js/class/Canvas.js
 
 	constructor() {
-		let timerBooked = this.timerBooked;
-		let minElt = this.minElt;
-		let secElt = this.secElt;
-		let canvas = this.canvas; // js/class/Canvas.js
+		this.timerBooked;
+		this.minElt = document.getElementById("min");
+		this.secElt = document.getElementById("sec");
+		// Object
+		this.canvas = new Canvas(); // js/class/Canvas.js
 	}
 
 	running() {

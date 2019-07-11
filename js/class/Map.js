@@ -7,32 +7,24 @@
 
 class Map {
 
-	coord_creteil = [48.785978155614686, 2.4594506630437536];
-	grayIcon;
-	yellowIcon;
-	zoomInputElt = document.getElementById("input_zoom");
-	zoom = false;
-	api_key = "ae736ed0d94957d43a63928cee44631af6036511";
 
 	constructor() {
+
 		// Coordinate
-		let coord_creteil = this.coord_creteil;
-		let grayIcon = this.grayIcon;
-		let yellowIcon = this.yellowIcon;
-		let orangeIcon = this.orangeIcon;
-		let redIcon = this.redIcon;
-		let zoomInputElt = this.zoomInputElt;
-		let zoom = this.zoom;
-		let api_key = this.api_key;
-		let stationObject = this.stationObject;
+		this.coord_creteil = [48.785978155614686, 2.4594506630437536];
+		this.grayIcon;
+		this.yellowIcon;
+		this.orangeIcon;
+		this.redIcon;;
+		this.zoomInputElt = document.getElementById("input_zoom");
+		this.zoom = false;
+		this.api_key = "ae736ed0d94957d43a63928cee44631af6036511";
+		this.stationObject;
 	}
 
 	addMap() {
-		// Coordinate
-		//var coord_creteil = [48.785978155614686, 2.4594506630437536];
-
 		// Map creation
-		var map = L.map('map', {dragging: !L.Browser.mobile}).setView(this.coord_creteil, 14);
+		let map = L.map('map', {dragging: !L.Browser.mobile}).setView(this.coord_creteil, 14);
 
 		return map;
 	}
@@ -113,9 +105,6 @@ class Map {
 
 
 	mapZoom() {
-		//variable
-		let zoom = this.zoom;
-
 		// Base state of zoom and drag
 		map.scrollWheelZoom.disable();
 
@@ -129,25 +118,24 @@ class Map {
 			map.dragging.disable();
 		}
 		
-		this.zoomInputElt.onclick = function() {
-		    if(!zoom) {
+		this.zoomInputElt.addEventListener("click", () =>{
+		    if(!this.zoom) {
 		        map.scrollWheelZoom.enable();
-		        zoom = true;
+		        this.zoom = true;
 		    }
 
-		    else if(zoom) {
+		    else if(this.zoom) {
 		        map.scrollWheelZoom.disable();
-		        zoom = false;
+		        this.zoom = false;
 		    }
-		}
+		});
 
 	} // End mapZoom
 
 	marker_data() {
-		let api_key = this.api_key;
-		let stationObject = this.stationObject;
+
         // Ajax request
-        ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Creteil&apiKey=" + api_key,
+        ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Creteil&apiKey=" + this.api_key,
             function (reponse) {
 
                 let data = JSON.parse(reponse);
@@ -155,6 +143,7 @@ class Map {
                 
                 // Creating objects
                 while(counter != data.length) {
+
                     let lat_lng = [data[counter].position.lat, data[counter].position.lng];
                     let city = data[counter].contract_name;
                     let name_address = data[counter].address;

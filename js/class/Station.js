@@ -1,11 +1,5 @@
 class Station {
 
-	addressInfoElt = document.getElementById("address_st");
-    statusInfoElt = document.getElementById("status");
-    status_bikeInfoElt = document.getElementById("status_bike");
-    form_field = document.getElementById("input_field");
-    text_information = document.getElementById("text_info");
-
 	constructor(coord, city_name, street_name, name_address, status_station, nb_avail_bikes) {
 		this.coord = coord;
 		this.city_name = city_name;
@@ -14,15 +8,16 @@ class Station {
 		this.available_bikes = nb_avail_bikes;
 		this.statusVelo = status_station;
 
-		let addressInfoElt = this.addressInfoElt;
-    	let statusInfoElt = this.statusInfoElt;
-    	let status_bikeInfoElt = this.status_bikeInfoElt;
-    	let form_field = this.form_field;
-    	let text_information = this.text_information;
-		let address_station = this.name_address;  
+        this.addressInfoElt = document.getElementById("address_st");
+        this.statusInfoElt = document.getElementById("status");
+        this.status_bikeInfoElt = document.getElementById("status_bike");
+        this.form_field = document.getElementById("input_field");
+        this.text_information = document.getElementById("text_info");
+		this.address_station = this.name_address;  
 	}
 
     add_marker() {
+
     	let addressInfoElt = this.addressInfoElt;
     	let statusInfoElt = this.statusInfoElt;
     	let status_bikeInfoElt = this.status_bikeInfoElt;
@@ -49,15 +44,16 @@ class Station {
         markerCity.bindPopup('<h3>' + 'Ville: ' + this.city_name + '<h3>' + 'Adresse: ' + this.name_address);
 
         // Show informations
-        markerCity.on('click', function() {
-
-            addressInfoElt.textContent = "Adresse: " + address_station;
-            statusInfoElt.textContent = "Status: " + statusVelo;
-            status_bikeInfoElt.textContent = "Vélo(s) disponible(s): " + available_bikes;
-
-            form_field.style.display = "block";
-            text_information.style.display = "none";
-        });
+        markerCity.on('click', this.popup_marker.bind(this));
     } // End add_marker
+
+    popup_marker() {
+        this.addressInfoElt.textContent = "Adresse: " + this.address_station;
+        this.statusInfoElt.textContent = "Status: " + this.statusVelo;
+        this.status_bikeInfoElt.textContent = "Vélo(s) disponible(s): " + this.available_bikes;
+
+        this.form_field.style.display = "block";
+        this.text_information.style.display = "none";
+    }
 
 }
